@@ -1,0 +1,77 @@
+\hypertarget{processus_8c}{}\doxysection{processus.\+c File Reference}
+\label{processus_8c}\index{processus.c@{processus.c}}
+{\ttfamily \#include \char`\"{}include/processus.\+h\char`\"{}}\newline
+Include dependency graph for processus.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{processus_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{processus_8c_a5d0bd579161d835c84e89f1cdf9a6a3a}{Creation\+Fils}} ()
+\begin{DoxyCompactList}\small\item\em Création d\textquotesingle{}un processus fils. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{processus_8c_a16367585b530f812dcadf8d9d2e22a91}{Gestion\+Fils}} (int pid)
+\begin{DoxyCompactList}\small\item\em Le fils lance un timer de 60 secondes. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{processus_8c_acc057f40b4321543fc545818ccb8d147}{Gestion\+Pere}} (int pid, char Double\+Tab\mbox{[}100\mbox{]}\mbox{[}30\mbox{]}, int compteur\+\_\+mot\+\_\+ecrit, char mot\+\_\+ecrit\mbox{[}30\mbox{]}, int mot\+\_\+correct)
+\begin{DoxyCompactList}\small\item\em ecoute des mots écrits par l\textquotesingle{}utilisateur et vérification de la validité du mot si oui incrémentation du compteur de mot correct \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{processus_8c_a5d0bd579161d835c84e89f1cdf9a6a3a}\label{processus_8c_a5d0bd579161d835c84e89f1cdf9a6a3a}} 
+\index{processus.c@{processus.c}!CreationFils@{CreationFils}}
+\index{CreationFils@{CreationFils}!processus.c@{processus.c}}
+\doxysubsubsection{\texorpdfstring{CreationFils()}{CreationFils()}}
+{\footnotesize\ttfamily int Creation\+Fils (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Création d\textquotesingle{}un processus fils. 
+
+\begin{DoxyReturn}{Returns}
+int pid 
+\end{DoxyReturn}
+\mbox{\Hypertarget{processus_8c_a16367585b530f812dcadf8d9d2e22a91}\label{processus_8c_a16367585b530f812dcadf8d9d2e22a91}} 
+\index{processus.c@{processus.c}!GestionFils@{GestionFils}}
+\index{GestionFils@{GestionFils}!processus.c@{processus.c}}
+\doxysubsubsection{\texorpdfstring{GestionFils()}{GestionFils()}}
+{\footnotesize\ttfamily void Gestion\+Fils (\begin{DoxyParamCaption}\item[{int}]{pid }\end{DoxyParamCaption})}
+
+
+
+Le fils lance un timer de 60 secondes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pid} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{processus_8c_acc057f40b4321543fc545818ccb8d147}\label{processus_8c_acc057f40b4321543fc545818ccb8d147}} 
+\index{processus.c@{processus.c}!GestionPere@{GestionPere}}
+\index{GestionPere@{GestionPere}!processus.c@{processus.c}}
+\doxysubsubsection{\texorpdfstring{GestionPere()}{GestionPere()}}
+{\footnotesize\ttfamily int Gestion\+Pere (\begin{DoxyParamCaption}\item[{int}]{pid,  }\item[{char}]{Double\+Tab\mbox{[}100\mbox{]}\mbox{[}30\mbox{]},  }\item[{int}]{compteur\+\_\+mot\+\_\+ecrit,  }\item[{char}]{mot\+\_\+ecrit\mbox{[}30\mbox{]},  }\item[{int}]{mot\+\_\+correct }\end{DoxyParamCaption})}
+
+
+
+ecoute des mots écrits par l\textquotesingle{}utilisateur et vérification de la validité du mot si oui incrémentation du compteur de mot correct 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pid} & \\
+\hline
+{\em Double\+Tab} & \\
+\hline
+{\em compteur\+\_\+mot\+\_\+ecrit} & \\
+\hline
+{\em mot\+\_\+ecrit} & \\
+\hline
+{\em mot\+\_\+correct} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int mot\+\_\+correct 
+\end{DoxyReturn}

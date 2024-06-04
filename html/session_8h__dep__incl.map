@@ -1,0 +1,9 @@
+<map id="lib/session.h" name="lib/session.h">
+<area shape="rect" id="node1" title="Spécification de la couche Session." alt="" coords="209,5,312,32"/>
+<area shape="rect" id="node2" href="$processus_8h.html" title="spécification des fonctions de gestion des processus" alt="" coords="5,80,156,107"/>
+<area shape="rect" id="node5" href="$data_8c.html" title=" " alt="" coords="257,155,339,181"/>
+<area shape="rect" id="node6" href="$data_8h.html" title="Spécification de la couche Data Representation." alt="" coords="181,80,263,107"/>
+<area shape="rect" id="node7" href="$session_8c.html" title=" " alt="" coords="339,80,441,107"/>
+<area shape="rect" id="node3" href="$processus_8c.html" title=" " alt="" coords="31,155,130,181"/>
+<area shape="rect" id="node4" href="$_projet_8c.html" title=" " alt="" coords="159,155,229,181"/>
+</map>

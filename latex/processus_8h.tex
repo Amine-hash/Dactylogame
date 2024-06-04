@@ -1,0 +1,113 @@
+\hypertarget{processus_8h}{}\doxysection{include/processus.h File Reference}
+\label{processus_8h}\index{include/processus.h@{include/processus.h}}
+
+
+spécification des fonctions de gestion des processus  
+
+
+{\ttfamily \#include \char`\"{}../lib/session.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/\+Projet.\+h\char`\"{}}\newline
+Include dependency graph for processus.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{processus_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{processus_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{processus_8h_a78372af0c27216c09c56c42db10be338}{stop\+Timer}} (int signal\+\_\+number)
+\item 
+int \mbox{\hyperlink{processus_8h_a5d0bd579161d835c84e89f1cdf9a6a3a}{Creation\+Fils}} ()
+\begin{DoxyCompactList}\small\item\em Création d\textquotesingle{}un processus fils. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{processus_8h_a16367585b530f812dcadf8d9d2e22a91}{Gestion\+Fils}} (int pid)
+\begin{DoxyCompactList}\small\item\em Le fils lance un timer de 60 secondes. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{processus_8h_acc057f40b4321543fc545818ccb8d147}{Gestion\+Pere}} (int pid, char Double\+Tab\mbox{[}100\mbox{]}\mbox{[}30\mbox{]}, int compteur\+\_\+mot\+\_\+ecrit, char mot\+\_\+ecrit\mbox{[}30\mbox{]}, int mot\+\_\+correct)
+\begin{DoxyCompactList}\small\item\em ecoute des mots écrits par l\textquotesingle{}utilisateur et vérification de la validité du mot si oui incrémentation du compteur de mot correct \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+spécification des fonctions de gestion des processus 
+
+\begin{DoxyAuthor}{Author}
+Théo COLIN -\/ Léonore LEGRAND 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2024-\/05-\/04 
+\end{DoxyDate}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{processus_8h_a5d0bd579161d835c84e89f1cdf9a6a3a}\label{processus_8h_a5d0bd579161d835c84e89f1cdf9a6a3a}} 
+\index{processus.h@{processus.h}!CreationFils@{CreationFils}}
+\index{CreationFils@{CreationFils}!processus.h@{processus.h}}
+\doxysubsubsection{\texorpdfstring{CreationFils()}{CreationFils()}}
+{\footnotesize\ttfamily int Creation\+Fils (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Création d\textquotesingle{}un processus fils. 
+
+\begin{DoxyReturn}{Returns}
+int pid 
+\end{DoxyReturn}
+\mbox{\Hypertarget{processus_8h_a16367585b530f812dcadf8d9d2e22a91}\label{processus_8h_a16367585b530f812dcadf8d9d2e22a91}} 
+\index{processus.h@{processus.h}!GestionFils@{GestionFils}}
+\index{GestionFils@{GestionFils}!processus.h@{processus.h}}
+\doxysubsubsection{\texorpdfstring{GestionFils()}{GestionFils()}}
+{\footnotesize\ttfamily void Gestion\+Fils (\begin{DoxyParamCaption}\item[{int}]{pid }\end{DoxyParamCaption})}
+
+
+
+Le fils lance un timer de 60 secondes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pid} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{processus_8h_acc057f40b4321543fc545818ccb8d147}\label{processus_8h_acc057f40b4321543fc545818ccb8d147}} 
+\index{processus.h@{processus.h}!GestionPere@{GestionPere}}
+\index{GestionPere@{GestionPere}!processus.h@{processus.h}}
+\doxysubsubsection{\texorpdfstring{GestionPere()}{GestionPere()}}
+{\footnotesize\ttfamily int Gestion\+Pere (\begin{DoxyParamCaption}\item[{int}]{pid,  }\item[{char}]{Double\+Tab\mbox{[}100\mbox{]}\mbox{[}30\mbox{]},  }\item[{int}]{compteur\+\_\+mot\+\_\+ecrit,  }\item[{char}]{mot\+\_\+ecrit\mbox{[}30\mbox{]},  }\item[{int}]{mot\+\_\+correct }\end{DoxyParamCaption})}
+
+
+
+ecoute des mots écrits par l\textquotesingle{}utilisateur et vérification de la validité du mot si oui incrémentation du compteur de mot correct 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pid} & \\
+\hline
+{\em Double\+Tab} & \\
+\hline
+{\em compteur\+\_\+mot\+\_\+ecrit} & \\
+\hline
+{\em mot\+\_\+ecrit} & \\
+\hline
+{\em mot\+\_\+correct} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int mot\+\_\+correct 
+\end{DoxyReturn}
+\mbox{\Hypertarget{processus_8h_a78372af0c27216c09c56c42db10be338}\label{processus_8h_a78372af0c27216c09c56c42db10be338}} 
+\index{processus.h@{processus.h}!stopTimer@{stopTimer}}
+\index{stopTimer@{stopTimer}!processus.h@{processus.h}}
+\doxysubsubsection{\texorpdfstring{stopTimer()}{stopTimer()}}
+{\footnotesize\ttfamily void stop\+Timer (\begin{DoxyParamCaption}\item[{int}]{signal\+\_\+number }\end{DoxyParamCaption})}
+

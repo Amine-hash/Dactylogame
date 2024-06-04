@@ -1,0 +1,20 @@
+<map id="Projet.c" name="Projet.c">
+<area shape="rect" id="node1" title=" " alt="" coords="305,5,376,32"/>
+<area shape="rect" id="node2" href="$_projet_8h.html" title="spécification du fichier principal" alt="" coords="522,155,645,181"/>
+<area shape="rect" id="node11" href="$affichage_8h.html" title="spécification des fonctions d&#39;affichage" alt="" coords="511,80,656,107"/>
+<area shape="rect" id="node12" href="$gestion_fichier_8h.html" title="spécification des fonctions de gestion de fichier (dictionnaire)" alt="" coords="29,80,204,107"/>
+<area shape="rect" id="node13" href="$conversion_8h.html" title="spécification des fonctions de conversion" alt="" coords="64,155,169,181"/>
+<area shape="rect" id="node14" href="$processus_8h.html" title="spécification des fonctions de gestion des processus" alt="" coords="336,80,487,107"/>
+<area shape="rect" id="node18" href="$data_8h.html" title="Spécification de la couche Data Representation." alt="" coords="229,80,311,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="195,229,262,256"/>
+<area shape="rect" id="node4" title=" " alt="" coords="100,229,171,256"/>
+<area shape="rect" id="node5" title=" " alt="" coords="633,229,697,256"/>
+<area shape="rect" id="node6" title=" " alt="" coords="5,229,76,256"/>
+<area shape="rect" id="node7" title=" " alt="" coords="721,229,795,256"/>
+<area shape="rect" id="node8" title=" " alt="" coords="534,229,609,256"/>
+<area shape="rect" id="node9" title=" " alt="" coords="819,229,907,256"/>
+<area shape="rect" id="node10" title=" " alt="" coords="932,229,1053,256"/>
+<area shape="rect" id="node15" href="$session_8h.html" title="Spécification de la couche Session." alt="" coords="281,155,395,181"/>
+<area shape="rect" id="node16" title=" " alt="" coords="287,229,389,256"/>
+<area shape="rect" id="node17" title=" " alt="" coords="414,229,510,256"/>
+</map>

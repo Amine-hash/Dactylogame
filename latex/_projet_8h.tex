@@ -1,0 +1,136 @@
+\hypertarget{_projet_8h}{}\doxysection{include/\+Projet.h File Reference}
+\label{_projet_8h}\index{include/Projet.h@{include/Projet.h}}
+
+
+spécification du fichier principal  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$sys/wait.\+h$>$}\newline
+{\ttfamily \#include $<$bits/sigaction.\+h$>$}\newline
+Include dependency graph for Projet.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_projet_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_projet_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_projet_8h_aa99b2405a82666086efae3ef4efb8718}{IP\+\_\+\+SRV}}~\char`\"{}127.\+0.\+0.\+1\char`\"{}
+\begin{DoxyCompactList}\small\item\em IP du serveur loopback 127.\+0.\+0.\+1 POUR TESTER EN LOCAL $\vert$ POUR TESTER EN RESEAU METTRE L\textquotesingle{}IP DU SERVEUR. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_projet_8h_a63cc51955a32e949e602d322d28762ec}{PORT\+\_\+\+SRV}}~5000
+\begin{DoxyCompactList}\small\item\em Port du serveur. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_projet_8h_a665612fb12cac51677225fef7b0c2c5a}{COUL}}(coul)~printf(\char`\"{}\textbackslash{}e\mbox{[}\%dm\char`\"{}, coul);
+\begin{DoxyCompactList}\small\item\em Permet de mettre en couleur le texte. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_projet_8h_aacb71dbc63837c5e60f70180643354b2}{CLEAR}}()~system(\char`\"{}clear\char`\"{});
+\begin{DoxyCompactList}\small\item\em Efface l\textquotesingle{}ecran avec la commande clear. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_projet_8h_a305b4900d4faa98d574bad2c8f849afa}{Client}} ()
+\begin{DoxyCompactList}\small\item\em Fonction client. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_projet_8h_a7272059ce8f76bb7435c851be799d681}{Serveur}} ()
+\begin{DoxyCompactList}\small\item\em Fonction serveur. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_projet_8h_a78372af0c27216c09c56c42db10be338}{stop\+Timer}} (int signal\+\_\+number)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+spécification du fichier principal 
+
+\begin{DoxyAuthor}{Author}
+Théo COLIN -\/ Léonore LEGRAND 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2024-\/05-\/04 
+\end{DoxyDate}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_projet_8h_aacb71dbc63837c5e60f70180643354b2}\label{_projet_8h_aacb71dbc63837c5e60f70180643354b2}} 
+\index{Projet.h@{Projet.h}!CLEAR@{CLEAR}}
+\index{CLEAR@{CLEAR}!Projet.h@{Projet.h}}
+\doxysubsubsection{\texorpdfstring{CLEAR}{CLEAR}}
+{\footnotesize\ttfamily \#define CLEAR(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~system(\char`\"{}clear\char`\"{});}
+
+
+
+Efface l\textquotesingle{}ecran avec la commande clear. 
+
+\mbox{\Hypertarget{_projet_8h_a665612fb12cac51677225fef7b0c2c5a}\label{_projet_8h_a665612fb12cac51677225fef7b0c2c5a}} 
+\index{Projet.h@{Projet.h}!COUL@{COUL}}
+\index{COUL@{COUL}!Projet.h@{Projet.h}}
+\doxysubsubsection{\texorpdfstring{COUL}{COUL}}
+{\footnotesize\ttfamily \#define COUL(\begin{DoxyParamCaption}\item[{}]{coul }\end{DoxyParamCaption})~printf(\char`\"{}\textbackslash{}e\mbox{[}\%dm\char`\"{}, coul);}
+
+
+
+Permet de mettre en couleur le texte. 
+
+\mbox{\Hypertarget{_projet_8h_aa99b2405a82666086efae3ef4efb8718}\label{_projet_8h_aa99b2405a82666086efae3ef4efb8718}} 
+\index{Projet.h@{Projet.h}!IP\_SRV@{IP\_SRV}}
+\index{IP\_SRV@{IP\_SRV}!Projet.h@{Projet.h}}
+\doxysubsubsection{\texorpdfstring{IP\_SRV}{IP\_SRV}}
+{\footnotesize\ttfamily \#define IP\+\_\+\+SRV~\char`\"{}127.\+0.\+0.\+1\char`\"{}}
+
+
+
+IP du serveur loopback 127.\+0.\+0.\+1 POUR TESTER EN LOCAL $\vert$ POUR TESTER EN RESEAU METTRE L\textquotesingle{}IP DU SERVEUR. 
+
+\mbox{\Hypertarget{_projet_8h_a63cc51955a32e949e602d322d28762ec}\label{_projet_8h_a63cc51955a32e949e602d322d28762ec}} 
+\index{Projet.h@{Projet.h}!PORT\_SRV@{PORT\_SRV}}
+\index{PORT\_SRV@{PORT\_SRV}!Projet.h@{Projet.h}}
+\doxysubsubsection{\texorpdfstring{PORT\_SRV}{PORT\_SRV}}
+{\footnotesize\ttfamily \#define PORT\+\_\+\+SRV~5000}
+
+
+
+Port du serveur. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_projet_8h_a305b4900d4faa98d574bad2c8f849afa}\label{_projet_8h_a305b4900d4faa98d574bad2c8f849afa}} 
+\index{Projet.h@{Projet.h}!Client@{Client}}
+\index{Client@{Client}!Projet.h@{Projet.h}}
+\doxysubsubsection{\texorpdfstring{Client()}{Client()}}
+{\footnotesize\ttfamily void Client (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Fonction client. 
+
+\mbox{\Hypertarget{_projet_8h_a7272059ce8f76bb7435c851be799d681}\label{_projet_8h_a7272059ce8f76bb7435c851be799d681}} 
+\index{Projet.h@{Projet.h}!Serveur@{Serveur}}
+\index{Serveur@{Serveur}!Projet.h@{Projet.h}}
+\doxysubsubsection{\texorpdfstring{Serveur()}{Serveur()}}
+{\footnotesize\ttfamily void Serveur (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Fonction serveur. 
+
+\mbox{\Hypertarget{_projet_8h_a78372af0c27216c09c56c42db10be338}\label{_projet_8h_a78372af0c27216c09c56c42db10be338}} 
+\index{Projet.h@{Projet.h}!stopTimer@{stopTimer}}
+\index{stopTimer@{stopTimer}!Projet.h@{Projet.h}}
+\doxysubsubsection{\texorpdfstring{stopTimer()}{stopTimer()}}
+{\footnotesize\ttfamily void stop\+Timer (\begin{DoxyParamCaption}\item[{int}]{signal\+\_\+number }\end{DoxyParamCaption})}
+

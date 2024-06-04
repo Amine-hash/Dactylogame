@@ -1,0 +1,147 @@
+\hypertarget{data_8h}{}\doxysection{lib/data.h File Reference}
+\label{data_8h}\index{lib/data.h@{lib/data.h}}
+
+
+Spécification de la couche Data Representation.  
+
+
+{\ttfamily \#include \char`\"{}session.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+Include dependency graph for data.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{data_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{data_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{data_8h_a1d5dab30b404fab91608086105afc78c}{MAX\+\_\+\+BUFFER}}~1024
+\begin{DoxyCompactList}\small\item\em taille d\textquotesingle{}un buffer\+\_\+t d\textquotesingle{}émission/réception \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef char \mbox{\hyperlink{data_8h_a97e5c313d1d8986ebeb91c25e9959195}{buffer\+\_\+t}}\mbox{[}\mbox{\hyperlink{data_8h_a1d5dab30b404fab91608086105afc78c}{MAX\+\_\+\+BUFFER}}\mbox{]}
+\item 
+typedef void $\ast$ \mbox{\hyperlink{data_8h_a3880ce875ea7e22dc1ad979b4da08bb2}{generic}}
+\item 
+typedef void($\ast$ \mbox{\hyperlink{data_8h_a0d588b0446583862eaf94f8dc9255e60}{p\+Fct}}) (\mbox{\hyperlink{data_8c_a20a07aa5a0a4656891f77115d03fd436}{generic}}, \mbox{\hyperlink{data_8c_a20a07aa5a0a4656891f77115d03fd436}{generic}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{data_8h_aa56b8d84de67f5ea7ea393a8884d3bbf}{envoyer}} (\mbox{\hyperlink{session_8h_a5ef0f2ca252f36a0c8d046d2eb67b416}{socket\+\_\+t}} $\ast$sock\+Ech, \mbox{\hyperlink{data_8c_a20a07aa5a0a4656891f77115d03fd436}{generic}} quoi, \mbox{\hyperlink{data_8h_a0d588b0446583862eaf94f8dc9255e60}{p\+Fct}} serial,...)
+\begin{DoxyCompactList}\small\item\em Envoi d\textquotesingle{}une requête/réponse sur une socket. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{data_8h_ad62cf336e585a61123084d2fc4ba4791}{recevoir}} (\mbox{\hyperlink{session_8h_a5ef0f2ca252f36a0c8d046d2eb67b416}{socket\+\_\+t}} $\ast$sock\+Ech, \mbox{\hyperlink{data_8c_a20a07aa5a0a4656891f77115d03fd436}{generic}} quoi, \mbox{\hyperlink{data_8h_a0d588b0446583862eaf94f8dc9255e60}{p\+Fct}} de\+Serial)
+\begin{DoxyCompactList}\small\item\em Réception d\textquotesingle{}une requête/réponse sur une socket. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Spécification de la couche Data Representation. 
+
+\begin{DoxyAuthor}{Author}
+Léonore Legrand 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+25 mars 2023 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{data_8h_a1d5dab30b404fab91608086105afc78c}\label{data_8h_a1d5dab30b404fab91608086105afc78c}} 
+\index{data.h@{data.h}!MAX\_BUFFER@{MAX\_BUFFER}}
+\index{MAX\_BUFFER@{MAX\_BUFFER}!data.h@{data.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_BUFFER}{MAX\_BUFFER}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+BUFFER~1024}
+
+
+
+taille d\textquotesingle{}un buffer\+\_\+t d\textquotesingle{}émission/réception 
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{data_8h_a97e5c313d1d8986ebeb91c25e9959195}\label{data_8h_a97e5c313d1d8986ebeb91c25e9959195}} 
+\index{data.h@{data.h}!buffer\_t@{buffer\_t}}
+\index{buffer\_t@{buffer\_t}!data.h@{data.h}}
+\doxysubsubsection{\texorpdfstring{buffer\_t}{buffer\_t}}
+{\footnotesize\ttfamily typedef char buffer\+\_\+t\mbox{[}\mbox{\hyperlink{data_8h_a1d5dab30b404fab91608086105afc78c}{MAX\+\_\+\+BUFFER}}\mbox{]}}
+
+\mbox{\Hypertarget{data_8h_a3880ce875ea7e22dc1ad979b4da08bb2}\label{data_8h_a3880ce875ea7e22dc1ad979b4da08bb2}} 
+\index{data.h@{data.h}!generic@{generic}}
+\index{generic@{generic}!data.h@{data.h}}
+\doxysubsubsection{\texorpdfstring{generic}{generic}}
+{\footnotesize\ttfamily typedef void$\ast$ \mbox{\hyperlink{data_8c_a20a07aa5a0a4656891f77115d03fd436}{generic}}}
+
+\mbox{\Hypertarget{data_8h_a0d588b0446583862eaf94f8dc9255e60}\label{data_8h_a0d588b0446583862eaf94f8dc9255e60}} 
+\index{data.h@{data.h}!pFct@{pFct}}
+\index{pFct@{pFct}!data.h@{data.h}}
+\doxysubsubsection{\texorpdfstring{pFct}{pFct}}
+{\footnotesize\ttfamily typedef void($\ast$ p\+Fct) (\mbox{\hyperlink{data_8c_a20a07aa5a0a4656891f77115d03fd436}{generic}}, \mbox{\hyperlink{data_8c_a20a07aa5a0a4656891f77115d03fd436}{generic}})}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{data_8h_aa56b8d84de67f5ea7ea393a8884d3bbf}\label{data_8h_aa56b8d84de67f5ea7ea393a8884d3bbf}} 
+\index{data.h@{data.h}!envoyer@{envoyer}}
+\index{envoyer@{envoyer}!data.h@{data.h}}
+\doxysubsubsection{\texorpdfstring{envoyer()}{envoyer()}}
+{\footnotesize\ttfamily void envoyer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{session_8h_a5ef0f2ca252f36a0c8d046d2eb67b416}{socket\+\_\+t}} $\ast$}]{sock\+Ech,  }\item[{\mbox{\hyperlink{data_8c_a20a07aa5a0a4656891f77115d03fd436}{generic}}}]{quoi,  }\item[{\mbox{\hyperlink{data_8h_a0d588b0446583862eaf94f8dc9255e60}{p\+Fct}}}]{serial,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+
+
+Envoi d\textquotesingle{}une requête/réponse sur une socket. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sock\+Ech} & \+: socket d\textquotesingle{}échange à utiliser pour l\textquotesingle{}envoi \\
+\hline
+{\em quoi} & \+: requête/réponse à serialiser avant l\textquotesingle{}envoi \\
+\hline
+{\em serial} & \+: pointeur sur la fonction de serialisation d\textquotesingle{}une requête/réponse \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+si le paramètre serial vaut NULL alors quoi est une chaîne de caractères 
+
+Si le mode est DGRAM, l\textquotesingle{}appel nécessite en plus l\textquotesingle{}adresse IP et le port. 
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+paramètre sock\+Ech modifié pour le mode DGRAM 
+\end{DoxyReturn}
+\mbox{\Hypertarget{data_8h_ad62cf336e585a61123084d2fc4ba4791}\label{data_8h_ad62cf336e585a61123084d2fc4ba4791}} 
+\index{data.h@{data.h}!recevoir@{recevoir}}
+\index{recevoir@{recevoir}!data.h@{data.h}}
+\doxysubsubsection{\texorpdfstring{recevoir()}{recevoir()}}
+{\footnotesize\ttfamily void recevoir (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{session_8h_a5ef0f2ca252f36a0c8d046d2eb67b416}{socket\+\_\+t}} $\ast$}]{sock\+Ech,  }\item[{\mbox{\hyperlink{data_8c_a20a07aa5a0a4656891f77115d03fd436}{generic}}}]{quoi,  }\item[{\mbox{\hyperlink{data_8h_a0d588b0446583862eaf94f8dc9255e60}{p\+Fct}}}]{de\+Serial }\end{DoxyParamCaption})}
+
+
+
+Réception d\textquotesingle{}une requête/réponse sur une socket. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sock\+Ech} & \+: socket d\textquotesingle{}échange à utiliser pour la réception \\
+\hline
+{\em quoi} & \+: requête/réponse reçue après dé-\/serialisation du buffer de réception \\
+\hline
+{\em de\+Serial} & \+: pointeur sur la fonction de dé-\/serialisation d\textquotesingle{}une requête/réponse \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+si le paramètre de\+Serial vaut NULL alors quoi est une chaîne de caractères 
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+paramètre quoi modifié avec le requête/réponse reçue paramètre sock\+Ech modifié pour le mode DGRAM 
+\end{DoxyReturn}
