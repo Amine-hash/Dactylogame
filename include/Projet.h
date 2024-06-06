@@ -44,6 +44,6 @@
 
 //prototypes
 
-void Client();
-void Serveur();
+void Client(char * ip_srv);
+void Serveur(char * ip_srv);
 void stopTimer(int signal_number);
