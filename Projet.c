@@ -14,15 +14,27 @@
 #include "include/processus.h"
 #include "lib/data.h"
 
-buffer_t buff;
 
-int main()
+buffer_t buff;
+//argument de la fonction main
+int main(int argc, char *argv[])
 {
+    char * ip_du_srv ;
+    //on récupère l'IP du serveur en argument si aucun argument alors l'IP est la constante IP_SRV
+    if (argc > 1)
+    {
+        ip_du_srv = argv[1];
+    }
+    else
+    {
+        ip_du_srv = IP_SRV;
+    }
     #ifdef SERVEUR
         //atexit(bye());
-        Serveur();
+        Serveur(ip_du_srv);
     #else
-        Client();
+    
+    Client(ip_du_srv);
     #endif
    
 }
@@ -31,7 +43,7 @@ int main()
  * @brief  Fonction client
  * 
  */
-void Client(void) 
+void Client(char * ip_srv) 
 {        
     socket_t sock;
     buffer_t rep;
@@ -51,7 +63,7 @@ void Client(void)
     int CurseurMotEcrit = 0;
     int compteur_mot_correct = 0;
     int numeroDeLigne = 0;
-    sock = connecterClt2Srv (IP_SRV, PORT_SRV);
+    sock = connecterClt2Srv (ip_srv, PORT_SRV);
     PAUSE("client connecté");
 
     //on recoit les 100 mots
@@ -90,8 +102,9 @@ void Client(void)
  * @brief  Fonction serveur
  * 
  */
-void Serveur()
+void Serveur(char * ip_srv)
 {
+    printf("ip du serveur : %s\n", ip_srv);
     socket_t se;
     char sequence[1024] = "";
     char sequence_save[1024];
@@ -173,7 +186,7 @@ void Serveur()
 
     int NbLignes = CompterLigneFichier(dictionnaire);
     // Création de la socket de réception des requêtes
-    se = creerSocketEcoute (IP_SRV, PORT_SRV);
+    se = creerSocketEcoute (ip_srv, PORT_SRV);
     PAUSE("Socket crée");
 
     //Récupération des 100 mots aléatoires

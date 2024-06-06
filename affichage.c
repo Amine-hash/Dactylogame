@@ -1,5 +1,4 @@
 #include "include/affichage.h"
-
 /**
  * @brief  Affichage du résultat final 
  * 
