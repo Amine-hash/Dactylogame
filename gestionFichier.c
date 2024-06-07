@@ -16,7 +16,7 @@ long CompterLigneFichier(char *nomFichier)
         exit(1);
     }
     long compteur = 0;
-    char c;
+    int c;
     while ((c = fgetc(fp)) != EOF)
     {
         if (c == '\n')

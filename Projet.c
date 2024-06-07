@@ -14,7 +14,6 @@
 #include "include/processus.h"
 #include "lib/data.h"
 
-
 buffer_t buff;
 //argument de la fonction main
 int main(int argc, char *argv[])
@@ -72,7 +71,13 @@ void Client(char * ip_srv)
     system("clear");
     get100MotsAleatoires(sequence,list_100_mots);
     ConversionTabMotsEnDoubleTableau(list_100_mots,tab_mot);
-    pid=CreationFils();
+    for (int i = 3; i > 0; i--)
+    {
+        printf("Début de la partie dans %d secondes\n", i);
+        sleep(1);
+        system("clear");
+    }
+    pid=CreationFils(); 
     GestionFils(pid);
     while(CurseurMotEcrit < 100)
     {
