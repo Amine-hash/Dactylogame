@@ -14,6 +14,17 @@
 #include "include/processus.h"
 #include "lib/data.h"
 
+#ifdef CROSS_COMPILE
+    #include <wiringPi.h>
+    #include "include/fonctionWiringPi.h"
+#endif
+
+typedef struct user {
+    char nom[30];
+    int score;
+    int position;
+}user_t ;
+
 buffer_t buff;
 //argument de la fonction main
 int main(int argc, char *argv[])
@@ -64,6 +75,11 @@ void Client(char * ip_srv)
     int numeroDeLigne = 0;
     sock = connecterClt2Srv (ip_srv, PORT_SRV);
     PAUSE("client connecté");
+    //on demande un nom d'utilisateur
+    printf("Entrez votre nom d'utilisateur : ");
+    scanf("%s", buff);
+    //on envoie le nom d'utilisateur au serveur
+    envoyer(&sock, buff, NULL);
 
     //on recoit les 100 mots
     recevoir(&sock, rep, NULL);
@@ -73,8 +89,13 @@ void Client(char * ip_srv)
     ConversionTabMotsEnDoubleTableau(list_100_mots,tab_mot);
     for (int i = 3; i > 0; i--)
     {
-        printf("Début de la partie dans %d secondes\n", i);
-        sleep(1);
+        #ifdef CROSS_COMPILE
+            printf("Début de la partie dans %d secondes\n", i);
+            Buzzer();
+        #else
+            printf("Début de la partie dans %d secondes\n", i);
+            sleep(1);
+        #endif
         system("clear");
     }
     pid=CreationFils(); 
@@ -97,6 +118,7 @@ void Client(char * ip_srv)
     sprintf(resultat, "%d", compteur_mot_correct);
     envoyer(&sock,resultat, NULL);
     //attente de la réponse du serveur
+    printf("Attente de la réponse du serveur\n");
     recevoir(&sock, res, NULL);
     system("clear");
     printf("\n%s\n", res);
@@ -117,6 +139,7 @@ void Serveur(char * ip_srv)
     int nbClientConnecte = 0;
     socket_t tab_sd[5];
     int tab_resulat[2];
+    //char * tab_nom[5];
     int ordreClient1 = 0;
     int ordreClient2 = 0;
     int choixMenu ;
@@ -124,7 +147,7 @@ void Serveur(char * ip_srv)
     int choixDifficulte = 1 ;
     int choixNbJoueurs = 1 ;
     char * dictionnaire = "dico/dico_facile.txt";  
-
+    user_t tab_user[5];
     while(choixMenu != 3)
         {
             CLEAR();
@@ -208,8 +231,27 @@ void Serveur(char * ip_srv)
             socket_t sd = accepterClt(se);
             tab_sd[nbClientConnecte] = sd;
             nbClientConnecte++;
+            tab_user[nbClientConnecte].score = 0;
+            tab_user[nbClientConnecte].position = nbClientConnecte;
         }
         printf("Clients connectés\n");
+        int compteur_nom_user = 0;
+        //on recoit le nom d'utilisateur des clients
+        while (compteur_nom_user < choixNbJoueurs)
+        {
+            buffer_t rep;
+            recevoir(&tab_sd[compteur_nom_user], rep, NULL);
+            //strcpy(tab_nom[compteur_nom_user], rep);
+            strcpy(tab_user[compteur_nom_user].nom, rep);
+            compteur_nom_user++;
+            //printf("Client %d : %s\n", compteur_nom_user, rep);
+        }
+
+        //on affiche les infos des clients
+        for (int i = 0; i < choixNbJoueurs; i++)
+        {
+            printf("Client %d : %s\n", i, tab_user[i].nom);
+        }
 
         // Envoi des 100 mots aux clients
         for (int i = 0; i < choixNbJoueurs; i++)
@@ -223,13 +265,21 @@ void Serveur(char * ip_srv)
             buffer_t rep;
             recevoir(&tab_sd[i], rep, NULL);
             tab_resulat[i] = atoi(rep);
+            tab_user[i].score = tab_resulat[i];
         }
+        printf("Résultats reçus\n");
         char resultatClients[5][3];
 
         for (int i = 0; i < choixNbJoueurs ;i++)
         {
             convertirNbToCode(tab_resulat[i], resultatClients[i]);
+            tab_user[i].score = tab_resulat[i];
         }
+        printf("Résultats convertis : \n");
+        /*for (int i = 0; i < choixNbJoueurs; i++)
+        {
+            printf("Client %d : %s\n", i, resultatClients[i]);
+        }*/
         
         char message[1024] = "";
         char message_save[1024] = "";
@@ -239,11 +289,14 @@ void Serveur(char * ip_srv)
             strcat(message, "Client ");
             convertirNbToCode(i, numeroClient);
             strcat(message, numeroClient );
+            strcat(message, " - ");
+            strcat(message,tab_user[i].nom );
             strcat(message, " : ");
             strcat(message, resultatClients[i]);
             strcat(message, " mots corrects\n");
         }
-
+        
+    
         //determination du gagnant
         int max = 0;
         int gagnant = 0;
@@ -256,16 +309,20 @@ void Serveur(char * ip_srv)
                 gagnant = i;
             }
         }
+        
         strcat(message, "Gagnant : Client ");
         convertirNbToCode(gagnant, gagnantStr);
         strcat(message, gagnantStr);
         strcpy(message_save, message);
 
-        // Envoi des résultats aux clients
+        //vérification que le sockets sont encore ouvertes
         for (int i = 0; i < choixNbJoueurs; i++)
         {
-            envoyer(&tab_sd[i], message, NULL);
-        }  
+            if(tab_sd[i].fd != -1)
+            {
+                envoyer(&tab_sd[i], message, NULL);
+            }
+        }
     }
     close(se.fd);
 }

@@ -1,7 +1,8 @@
 PATH_CC=/home/theo/Bureau/rpi/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin
 CCC=$(PATH_CC)/arm-linux-gnueabihf-gcc
 DESTDIR=/home/theo/Bureau/rpi/wiringPi-36fb7f1/target-rpi
-PI="172.20.10.3"
+PI=172.20.10.5
+PI2=172.20.10.3
 MON_PATH=/home/theo/Bureau/rpi
 
 all : lib Projet cc 
@@ -34,7 +35,21 @@ cc : Projet.c processus.c affichage.c conversion.c gestionFichier.c ./lib/libmcs
 	sshpass -prpi scp -r ./dico pi@$(PI):/home/pi/objet_connecte
 	sshpass -prpi scp -r ./lib pi@$(PI):/home/pi/objet_connecte
 #cp  $MON_PATH/wiringPi-36fb7f1/target-rpi/lib/libwiringPi* 
-	sshpass -prpi scp -r $(MON_PATH)/wiringPi-36fb7f1/target-rpi/bin/gpio pi@$(PI):/home/pi/objet_connecte
+sshpass -prpi scp -r $(MON_PATH)/wiringPi-36fb7f1/target-rpi/bin/gpio pi@$(PI):/home/pi/objet_connecte
+
+cc2 : Projet.c processus.c affichage.c conversion.c gestionFichier.c ./lib/libmcs.a
+	echo $(DESTDIR)
+	make ccLib
+	$(CCC) -DSERVEUR -L./lib -std=gnu99 -o serveur_rpi affichage.c processus.c conversion.c gestionFichier.c Projet.c -lmcs -lpthread 
+	$(CCC) -L./lib  -DCROSS_COMPILE -I$(DESTDIR)/include -L$(DESTDIR)/lib -std=gnu99 -o client_rpi processus.c affichage.c conversion.c gestionFichier.c Projet.c fonctionWiringPi.c -lmcs -lpthread -lwiringPi
+	sshpass -prpi scp serveur_rpi  rpi@$(PI2):/home/rpi/objet_connecte
+	sshpass -prpi scp client_rpi rpi@$(PI2):/home/rpi/objet_connecte
+	sshpass -prpi scp -r ./dico rpi@$(PI2):/home/rpi/objet_connecte
+	sshpass -prpi scp -r ./lib rpi@$(PI2):/home/rpi/objet_connecte
+	sshpass -prpi scp -r $(MON_PATH)/wiringPi-36fb7f1/target-rpi/bin/gpio pi@$(PI2):/home/pi/objet_connecte
+#cp  $MON_PATH/wiringPi-36fb7f1/target-rpi/lib/libwiringPi*
+	sshpass -prpi scp -r $(MON_PATH)/wiringPi-36fb7f1/target-rpi/lib/libwiringPi* rpi@$(PI2):/home/rpi/objet_connecte
+
 ccLib : 
 	echo $(CCC)
 	cd lib && make clean
