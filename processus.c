@@ -31,8 +31,11 @@ void GestionFils(int pid)
         alarm(60);
         //creation d'un thread qui compte chaque seconde
         pthread_t thread_compteur;
-        pthread_create(&thread_compteur, NULL,TraitementCompteur, NULL );
+        pthread_create(&thread_compteur, NULL,TraitementCompteur, NULL);
         pause();
+        #ifdef CROSS_COMPILE
+            JouerNoteDeFin();
+        #endif
         exit(0);
     }
 }
@@ -77,22 +80,18 @@ void *TraitementCompteur(void *arg)
     while (i < 60)
     {
         #ifdef CROSS_COMPILE
-        //affichage ecran LCD
-        //Led();
-        //printf("Temps restant : %d\n", 60 - i);
-        int fd = wiringPiI2CSetup(I2C_ADDRESS); // Initialisation de l'afficheur 7 segments
-    
-        // Configuration de l'afficheur 7 segments
-        wiringPiI2CWriteReg8(fd, 0x21, 0x01);
-        wiringPiI2CWriteReg8(fd, 0x81, 0x00); 
-        wiringPiI2CWriteReg8(fd, 0xef, 0x00);
-        chrono(fd);
+            int fd = wiringPiI2CSetup(I2C_ADDRESS); // Initialisation de l'afficheur 7 segments
+            // Configuration de l'afficheur 7 segments
+            wiringPiI2CWriteReg8(fd, 0x21, 0x01);
+            wiringPiI2CWriteReg8(fd, 0x81, 0x00); 
+            wiringPiI2CWriteReg8(fd, 0xef, 0x00);
+            chrono(fd);
         #else
         sleep(1);
-        
-        
         #endif
         i++;
     }
+    //fermeture du thread
+    pthread_exit(NULL);
     return NULL;
 }

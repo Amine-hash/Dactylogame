@@ -41,7 +41,7 @@ void affichage7segments(int fd,int sec, int min){
 
 void chrono(int fd){
     
-    int sec=1; //car il y a un certains décalage entre le moment ou on lance le chrono et le moment ou il s'affiche
+    int sec=0; //car il y a un certains décalage entre le moment ou on lance le chrono et le moment ou il s'affiche
     int min=0; 
     affichage7segments(fd,sec,min);
     while (1){
@@ -57,9 +57,20 @@ void chrono(int fd){
     }
     if (sec>=60){
       sec=0;
-      min++;  
+      min++;
+      break;  
     }
     sec++; 
     affichage7segments(fd,sec,min);
     }
+}
+
+void JouerNoteDeFin()
+{
+    wiringPiSetup();
+    pinMode(BUZZER, OUTPUT);
+    digitalWrite (BUZZER, HIGH) ;	// On
+    delay (1000) ;		// mS
+    digitalWrite (BUZZER, LOW) ;	// Off
+    delay (1000) ;
 }

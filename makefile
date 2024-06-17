@@ -11,7 +11,7 @@ all : lib Projet cc
 Projet : Projet.c processus.c affichage.c conversion.c gestionFichier.c 
 	cd lib && make clean
 	cd lib && make
-	gcc -o  serveur_pc processus.c affichage.c conversion.c gestionFichier.c Projet.c -DSERVEUR -L./lib -lmcs -lpthread
+	gcc -o serveur_pc processus.c affichage.c conversion.c gestionFichier.c Projet.c -DSERVEUR -L./lib -lmcs -lpthread
 	gcc -o client_pc processus.c affichage.c conversion.c gestionFichier.c Projet.c -L./lib -lmcs -lpthread
 
 clean : 

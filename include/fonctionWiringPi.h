@@ -9,3 +9,4 @@ void Led();
 void affichage7segments(int fd,int sec, int min);
 void chrono(int fd);
 void Buzzer();
+void JouerNoteDeFin();

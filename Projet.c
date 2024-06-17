@@ -240,6 +240,7 @@ void Serveur(char * ip_srv)
         while (compteur_nom_user < choixNbJoueurs)
         {
             buffer_t rep;
+            memset(rep, 0, sizeof(rep));
             recevoir(&tab_sd[compteur_nom_user], rep, NULL);
             //strcpy(tab_nom[compteur_nom_user], rep);
             strcpy(tab_user[compteur_nom_user].nom, rep);
@@ -248,21 +249,23 @@ void Serveur(char * ip_srv)
         }
 
         //on affiche les infos des clients
+        /*
         for (int i = 0; i < choixNbJoueurs; i++)
         {
-            printf("Client %d : %s\n", i, tab_user[i].nom);
-        }
+            //printf("Client %d : %s\n", i, tab_user[i].nom);
+        }*/
 
         // Envoi des 100 mots aux clients
         for (int i = 0; i < choixNbJoueurs; i++)
         {
-            printf("Envoi des 100 mots au client %d\n", i);
+            //printf("Envoi des 100 mots au client %d\n", i);
             envoyer(&tab_sd[i], sequence_save, NULL);
         }
         // Attente des réponses des clients (resultats)
         for (int i = 0; i < choixNbJoueurs; i++)
         {
             buffer_t rep;
+            memset(rep, 0, sizeof(rep));
             recevoir(&tab_sd[i], rep, NULL);
             tab_resulat[i] = atoi(rep);
             tab_user[i].score = tab_resulat[i];
@@ -275,7 +278,7 @@ void Serveur(char * ip_srv)
             convertirNbToCode(tab_resulat[i], resultatClients[i]);
             tab_user[i].score = tab_resulat[i];
         }
-        printf("Résultats convertis : \n");
+        //printf("Résultats convertis : \n");
         /*for (int i = 0; i < choixNbJoueurs; i++)
         {
             printf("Client %d : %s\n", i, resultatClients[i]);
