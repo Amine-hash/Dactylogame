@@ -304,19 +304,39 @@ void Serveur(char * ip_srv)
         int max = 0;
         int gagnant = 0;
         char gagnantStr[6];
+        char * pseudo_gagnant;
+        char iStr[6];
+        char * pseudo_i;
         for (int i = 0 ; i < choixNbJoueurs; i++)
         {
             if (tab_resulat[i] > max)
             {
                 max = tab_resulat[i];
                 gagnant = i;
+                pseudo_gagnant = tab_user[i].nom;
             }
         }
-        
         strcat(message, "Gagnant : Client ");
         convertirNbToCode(gagnant, gagnantStr);
         strcat(message, gagnantStr);
+        strcat(message, " ");
+        strcat(message, pseudo_gagnant);
         strcpy(message_save, message);
+
+        // Vérification des égalités et mise à jour du gagnant en conséquence
+        for (int i = 0; i < choixNbJoueurs; i++) {
+            if (tab_resulat[i] == max && i != gagnant) {
+                pseudo_i = tab_user[i].nom;
+                strcat(message, " égalité avec le Client ");
+                convertirNbToCode(i, iStr);
+                strcat(message, iStr);
+                strcat(message, " ");
+                strcat(message, pseudo_i);
+                strcpy(message_save, message);
+            }
+        }
+        
+
 
         //vérification que le sockets sont encore ouvertes
         for (int i = 0; i < choixNbJoueurs; i++)
