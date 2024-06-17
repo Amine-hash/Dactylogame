@@ -1,4 +1,8 @@
 #include "include/processus.h"
+#ifdef CROSS_COMPILE
+    #include <wiringPi.h>
+    #include "include/fonctionWiringPi.h"
+#endif
 
 /**
  * @brief Création d'un processus fils
@@ -25,7 +29,13 @@ void GestionFils(int pid)
     {
         //on lance le timer
         alarm(60);
+        //creation d'un thread qui compte chaque seconde
+        pthread_t thread_compteur;
+        pthread_create(&thread_compteur, NULL,TraitementCompteur, NULL);
         pause();
+        #ifdef CROSS_COMPILE
+            JouerNoteDeFin();
+        #endif
         exit(0);
     }
 }
@@ -56,4 +66,32 @@ int GestionPere(int pid , char DoubleTab[100][30] , int compteur_mot_ecrit , cha
         mot_correct++;
     }
     return mot_correct;
+}
+
+/**
+ * @brief Fonction qui compte le temps
+ * 
+ * @param arg 
+ * @return void* 
+ */
+void *TraitementCompteur(void *arg)
+{
+    int i = 0;
+    while (i < 60)
+    {
+        #ifdef CROSS_COMPILE
+            int fd = wiringPiI2CSetup(I2C_ADDRESS); // Initialisation de l'afficheur 7 segments
+            // Configuration de l'afficheur 7 segments
+            wiringPiI2CWriteReg8(fd, 0x21, 0x01);
+            wiringPiI2CWriteReg8(fd, 0x81, 0x00); 
+            wiringPiI2CWriteReg8(fd, 0xef, 0x00);
+            chrono(fd);
+        #else
+        sleep(1);
+        #endif
+        i++;
+    }
+    //fermeture du thread
+    pthread_exit(NULL);
+    return NULL;
 }

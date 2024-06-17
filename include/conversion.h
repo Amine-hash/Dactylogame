@@ -7,10 +7,13 @@
  * 
  * 
  */
+//si le fichier n'est pas défini
+#ifndef CONVERSION_H
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#define CONVERSION_H
+#endif
 //prototypes
 
 void convertirNbToCode(long nb, char nbCodee[6]);

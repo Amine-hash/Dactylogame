@@ -7,8 +7,11 @@
  * 
  * 
  */
+//si le fichier n'est pas défini
+#ifndef GESTIONFICHIER_H
 #include "conversion.h"
-
+#define GESTIONFICHIER_H
+#endif
 //prototypes
 long CompterLigneFichier(char *nomFichier);
 void get100MotsAleatoires(char sequence[1024], char liste_mots[3000]);
