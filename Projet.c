@@ -17,6 +17,7 @@
 #ifdef CROSS_COMPILE
     #include <wiringPi.h>
     #include "include/fonctionWiringPi.h"
+    int lcdHandle;
 #endif
 
 typedef struct user {
@@ -24,6 +25,8 @@ typedef struct user {
     int score;
     int position;
 }user_t ;
+
+volatile sig_atomic_t end = 0;
 
 buffer_t buff;
 //argument de la fonction main
@@ -58,12 +61,18 @@ void Client(char * ip_srv)
     socket_t sock;
     buffer_t rep;
     buffer_t res ;
+    
+    #ifdef CROSS_COMPILE
 
+        //lcdHandle = initLCD();
+        //wiringPiSetupPhys();
+    #endif
     int i;
     struct sigaction newact ;
     newact.sa_handler = stopTimer ;
     newact.sa_flags = 0 ;
     sigaction(SIGALRM, &newact, NULL) ;
+    sigaction(SIGUSR1, &newact, NULL) ;
     int pid ;
     int status;
     char list_100_mots[3000];
@@ -92,7 +101,7 @@ void Client(char * ip_srv)
     {
         #ifdef CROSS_COMPILE
             printf("Début de la partie dans %d secondes\n", i);
-            //Buzzer();
+            Buzzer();
         #else
             printf("Début de la partie dans %d secondes\n", i);
             sleep(1);
@@ -110,6 +119,10 @@ void Client(char * ip_srv)
         AffichageListeDeMots(tab_mot, CurseurMotEcrit);
 
         compteur_mot_correct = GestionPere(pid,tab_mot, CurseurMotEcrit, mot_ecrit, compteur_mot_correct);
+        if(end == 1)
+        {
+            break;
+        }
         CurseurMotEcrit++;    
     }
     AffichageResultat(compteur_mot_correct);
@@ -291,6 +304,11 @@ void stopTimer(int signal_number)
         case SIGALRM:
             //depassement de delai
             printf("\nTemps écoulé - Veuillez envoyer un message pour afficher les resultats\n");
+            break;
+        
+        case SIGUSR1:
+            //fin de partie
+            end = 1;
             break;
     }
 }
