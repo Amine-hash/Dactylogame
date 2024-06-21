@@ -6,7 +6,8 @@
  * @date 2024-05-04
  * 
  */
-
+//si le fichier n'est pas défini
+#ifndef PROJET_H
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -14,8 +15,18 @@
 #include <signal.h>
 #include <unistd.h>
 #include <sys/wait.h>
-#include <bits/sigaction.h>
+#include <signal.h>
 
+typedef struct param_partie_t
+{
+    int choixDifficulte;
+    int choixNbJoueurs;
+    char * dictionnaire;
+}param_partie_t;
+
+
+#define PROJET_H
+#endif
 //MACRO-CONSTANTES
 /**
  * @brief  IP du serveur loopback 127.0.0.1 POUR TESTER EN LOCAL | POUR TESTER EN RESEAU METTRE L'IP DU SERVEUR
@@ -47,3 +58,5 @@
 void Client(char * ip_srv);
 void Serveur(char * ip_srv);
 void stopTimer(int signal_number);
+
+

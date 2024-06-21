@@ -53,7 +53,7 @@ void adr2struct (struct sockaddr_in *addr, char *adrIP, short port){
 	//fprintf(stderr,"\tadrIP : %s\n",adrIP);
 	//printf("\tport : %d\n",port);
 	//printf("adr2struct\n");
-	addr->sin_family = PF_INET;
+	addr->sin_family = AF_INET;
     addr->sin_port = htons (port);
     addr->sin_addr.s_addr = inet_addr(adrIP);
 	memset(&addr->sin_zero, 0, 8);
@@ -68,7 +68,7 @@ void adr2struct (struct sockaddr_in *addr, char *adrIP, short port){
 socket_t creerSocket (int mode){
 	socket_t sock;
 	sock.mode = mode;
-	CHECK(sock.fd = socket(PF_INET, mode, 0), "Can't create");
+	CHECK(sock.fd = socket(AF_INET, mode, 0), "Can't create");
 	return sock;
 }
 
@@ -88,7 +88,7 @@ socket_t creerSocketAdr (int mode, char *adrIP, short port){
 	//printf("\tport : %d\n",port);
 	adr2struct (&sock.addrLoc, adrIP, port);
 	//printf("after_adr2struct\n");
-	CHECK(bind(sock.fd, (struct sockaddr *)&sock.addrLoc, sizeof sock) , "Can't bind");
+	CHECK(bind(sock.fd, (struct sockaddr *)&sock.addrLoc, sizeof sock.addrLoc) , "Can't bind");
 	return sock;
 }
 /**
@@ -100,7 +100,6 @@ socket_t creerSocketAdr (int mode, char *adrIP, short port){
  *	\note		Le domaine est nécessairement STREAM
  */
 socket_t creerSocketEcoute (char *adrIP, short port){
-	printf("Creer socket ecoute\n");
 	socket_t sock = creerSocketAdr (SOCK_STREAM, adrIP, port);
 	    // Mise en écoute de la socket
     CHECK(listen(sock.fd, 5) , "Can't calibrate");
@@ -116,7 +115,7 @@ socket_t accepterClt (const socket_t sockEcoute){
 	socket_t sock;
 	sock.mode= SOCK_STREAM;
 	sock.addrLoc=sockEcoute.addrLoc;
-	int cltLen=sizeof(sockEcoute);
+	int cltLen=sizeof(sock.addrDst);
     CHECK(sock.fd=accept(sockEcoute.fd, (struct sockaddr *)&sock.addrDst, &cltLen), "Can't connect at accepterClt");
 	return sock;
 }
