@@ -70,3 +70,29 @@ void JouerNoteDeFin()
     digitalWrite (BUZZER, LOW) ;	// Off
     delay (1000) ;
 }
+
+int initLCD(){
+    int i;
+    int lcdHandle;
+    int fd = wiringPiI2CSetup(I2C_ADDRESS_LCD);
+    for (i=0; i<9; i++){
+        wiringPiI2CWriteReg8(fd, i, 0xFF);
+    }
+    wiringPiSetupSys();
+    mcp23008Setup(PIN_BASE, I2C_ADDRESS_LCD);
+    pinMode(PIN_BASE, OUTPUT);
+
+    lcdHandle = lcdInit(2, 16, 4, PIN_BASE+RS, PIN_BASE+E, PIN_BASE+DB4, PIN_BASE+DB5, PIN_BASE+DB6, PIN_BASE+DB7, 0, 0, 0, 0);
+    if (lcdHandle == -1) {
+        printf("lcdInit failed!\n");
+        return -1;
+    }
+    lcdDisplay(lcdHandle, 1);
+    return lcdHandle;
+}
+
+
+void writeLCD(int lcdHandle, int line, int column, const char* message){
+    lcdPosition(lcdHandle, line, column);
+    lcdPuts(lcdHandle, message);
+}
