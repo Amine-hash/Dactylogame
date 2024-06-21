@@ -34,7 +34,7 @@ void GestionFils(int pid)
         pthread_create(&thread_compteur, NULL,TraitementCompteur, NULL);
         pause();
         #ifdef CROSS_COMPILE
-            JouerNoteDeFin();
+            //JouerNoteDeFin();
         #endif
         exit(0);
     }
@@ -76,8 +76,10 @@ int GestionPere(int pid , char DoubleTab[100][30] , int compteur_mot_ecrit , cha
  */
 void *TraitementCompteur(void *arg)
 {
-    int i = 0;
-    while (i < 60)
+    int i = 60;
+    
+
+    while (i >= 0)
     {
         #ifdef CROSS_COMPILE
             int fd = wiringPiI2CSetup(I2C_ADDRESS); // Initialisation de l'afficheur 7 segments
@@ -89,7 +91,7 @@ void *TraitementCompteur(void *arg)
         #else
         sleep(1);
         #endif
-        i++;
+        i--;
     }
     //fermeture du thread
     pthread_exit(NULL);

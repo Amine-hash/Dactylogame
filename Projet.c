@@ -74,7 +74,8 @@ void Client(char * ip_srv)
     int compteur_mot_correct = 0;
     int numeroDeLigne = 0;
     sock = connecterClt2Srv (ip_srv, PORT_SRV);
-    PAUSE("client connecté");
+    printf("En attente de connexion de l'ensemble des clients...\n");
+    CLEAR();
     //on demande un nom d'utilisateur
     printf("Entrez votre nom d'utilisateur : ");
     scanf("%s", buff);
@@ -91,7 +92,7 @@ void Client(char * ip_srv)
     {
         #ifdef CROSS_COMPILE
             printf("Début de la partie dans %d secondes\n", i);
-            Buzzer();
+            //Buzzer();
         #else
             printf("Début de la partie dans %d secondes\n", i);
             sleep(1);
@@ -138,95 +139,30 @@ void Serveur(char * ip_srv)
     int compteur_reponse = 0;
     int nbClientConnecte = 0;
     socket_t tab_sd[5];
-    int tab_resulat[2];
-    //char * tab_nom[5];
-    int ordreClient1 = 0;
-    int ordreClient2 = 0;
+    int tab_resultat[2];
     int choixMenu ;
     char *  choixMenuStr ;
-    int choixDifficulte = 1 ;
-    int choixNbJoueurs = 1 ;
     char * dictionnaire = "dico/dico_facile.txt";  
     user_t tab_user[5];
-    while(choixMenu != 3)
-        {
-            CLEAR();
-            printf("---Menu de choix du serveur---\n");
-            printf("-1- Dificulté facile-intermédiaire-difficile\n");
-            printf("-2- Nombre de joueurs\n");
-            printf("-3- Lancer la partie\n");
-            printf("-0- Quitter\n");
-            printf("---------------------------------------------------------\n");
-            printf("Paramètres actuels : Difficulté : %d - Nombre de joueurs : %d\n", choixDifficulte, choixNbJoueurs);
-            printf("---------------------------------------------------------\n");
-            //on récupère le choix du serveur uniquement des nombres
-            scanf("%d", &choixMenu);
-            if(choixMenu < 0 || choixMenu > 3)
-            {
-                printf("Choix invalide\n");
-                choixMenu = 0;
-            }
-            switch (choixMenu)
-            {
-            case 1:
-                printf("Selectionner la difficulté\n");
-                //menu de choix de la difficulté
-                printf("-1- Facile\n");
-                printf("-2- Intermédiaire\n");
-                printf("-3- Difficile\n");
-                scanf("%d", &choixDifficulte);
-                if(choixDifficulte < 1 || choixDifficulte > 3)
-                {
-                    printf("Choix invalide\n");
-                    choixDifficulte = 1;
-                }
-                switch(choixDifficulte)
-                {
-                    case 1:
-                        dictionnaire = "dico/dico_facile.txt";
-                        break;
-                    case 2:
-                        dictionnaire = "dico/dico_intermediaire.txt";
-                        break;
-                    case 3:
-                        dictionnaire = "dico/dico_difficile.txt";
-                        break;
-                }
-                break;
-            case 2:
-                printf("Nombre de joueurs ( 5 maximum )\n");
-                scanf("%d", &choixNbJoueurs);
-                if ( choixNbJoueurs < 1 || choixNbJoueurs > 5)
-                {
-                    printf("Choix invalide\n");
-                    choixNbJoueurs = 1;
-                }
-                break;
-            case 3:
-                printf("Lancer la partie\n");
-                break;
-            case 0:
-                printf("Quitter\n");
-                exit(0);
-                break;
-            }
-        }
-
-    int NbLignes = CompterLigneFichier(dictionnaire);
+    param_partie_t parametres;
+    parametres.choixDifficulte = 1;
+    parametres.choixNbJoueurs = 1;
+    parametres.dictionnaire = "dico/dico_facile.txt";
+    parametres = Menu(parametres);
+    int NbLignes = CompterLigneFichier(parametres.dictionnaire);
     // Création de la socket de réception des requêtes
     se = creerSocketEcoute (ip_srv, PORT_SRV);
-    PAUSE("Socket crée");
 
     //Récupération des 100 mots aléatoires
     srand(time(0));
     get100NbAleatoires(sequence, NbLignes);
-    strcat(sequence, dictionnaire);
+    strcat(sequence, parametres.dictionnaire);
     strcpy(sequence_save, sequence);
     // Boucle permanente de serveur
     while (1) {
         
         // Attente d’un appel
-        while (nbClientConnecte < choixNbJoueurs)
+        while (nbClientConnecte < parametres.choixNbJoueurs)
         {
             socket_t sd = accepterClt(se);
             tab_sd[nbClientConnecte] = sd;
@@ -237,7 +173,7 @@ void Serveur(char * ip_srv)
         printf("Clients connectés\n");
         int compteur_nom_user = 0;
         //on recoit le nom d'utilisateur des clients
-        while (compteur_nom_user < choixNbJoueurs)
+        while (compteur_nom_user < parametres.choixNbJoueurs)
         {
             buffer_t rep;
             memset(rep, 0, sizeof(rep));
@@ -256,38 +192,33 @@ void Serveur(char * ip_srv)
         }*/
 
         // Envoi des 100 mots aux clients
-        for (int i = 0; i < choixNbJoueurs; i++)
+        for (int i = 0; i < parametres.choixNbJoueurs; i++)
         {
             //printf("Envoi des 100 mots au client %d\n", i);
             envoyer(&tab_sd[i], sequence_save, NULL);
         }
         // Attente des réponses des clients (resultats)
-        for (int i = 0; i < choixNbJoueurs; i++)
+        for (int i = 0; i < parametres.choixNbJoueurs; i++)
         {
             buffer_t rep;
             memset(rep, 0, sizeof(rep));
             recevoir(&tab_sd[i], rep, NULL);
-            tab_resulat[i] = atoi(rep);
-            tab_user[i].score = tab_resulat[i];
+            tab_resultat[i] = atoi(rep);
+            tab_user[i].score = tab_resultat[i];
         }
         printf("Résultats reçus\n");
         char resultatClients[5][3];
 
-        for (int i = 0; i < choixNbJoueurs ;i++)
+        for (int i = 0; i < parametres.choixNbJoueurs ;i++)
         {
-            convertirNbToCode(tab_resulat[i], resultatClients[i]);
-            tab_user[i].score = tab_resulat[i];
+            convertirNbToCode(tab_resultat[i], resultatClients[i]);
+            tab_user[i].score = tab_resultat[i];
         }
-        //printf("Résultats convertis : \n");
-        /*for (int i = 0; i < choixNbJoueurs; i++)
-        {
-            printf("Client %d : %s\n", i, resultatClients[i]);
-        }*/
         
         char message[1024] = "";
         char message_save[1024] = "";
         char numeroClient[6];
-        for (int i = 0; i < choixNbJoueurs; i++)
+        for (int i = 0; i < parametres.choixNbJoueurs; i++)
         {
             strcat(message, "Client ");
             convertirNbToCode(i, numeroClient);
@@ -304,11 +235,11 @@ void Serveur(char * ip_srv)
         int max = 0;
         int gagnant = 0;
         char gagnantStr[6];
-        for (int i = 0 ; i < choixNbJoueurs; i++)
+        for (int i = 0 ; i < parametres.choixNbJoueurs; i++)
         {
-            if (tab_resulat[i] > max)
+            if (tab_resultat[i] > max)
             {
-                max = tab_resulat[i];
+                max = tab_resultat[i];
                 gagnant = i;
             }
         }
@@ -319,15 +250,20 @@ void Serveur(char * ip_srv)
         strcpy(message_save, message);
 
         //vérification que le sockets sont encore ouvertes
-        for (int i = 0; i < choixNbJoueurs; i++)
+        for (int i = 0; i < parametres.choixNbJoueurs; i++)
         {
             if(tab_sd[i].fd != -1)
             {
                 envoyer(&tab_sd[i], message, NULL);
             }
         }
+        //réinitialisation des variables
+        nbClientConnecte = 0;
+        compteur_reponse = 0;
+        close(se.fd);
+        sleep(1);
+        exit(0);
     }
-    close(se.fd);
 }
 
 void stopTimer(int signal_number)

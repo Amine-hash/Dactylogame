@@ -16,6 +16,15 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <signal.h>
+
+typedef struct param_partie_t
+{
+    int choixDifficulte;
+    int choixNbJoueurs;
+    char * dictionnaire;
+}param_partie_t;
+
+
 #define PROJET_H
 #endif
 //MACRO-CONSTANTES
@@ -49,3 +58,5 @@
 void Client(char * ip_srv);
 void Serveur(char * ip_srv);
 void stopTimer(int signal_number);
+
+

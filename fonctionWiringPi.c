@@ -41,26 +41,22 @@ void affichage7segments(int fd,int sec, int min){
 
 void chrono(int fd){
     
-    int sec=0; //car il y a un certains décalage entre le moment ou on lance le chrono et le moment ou il s'affiche
+    int sec=59; //car il y a un certains décalage entre le moment ou on lance le chrono et le moment ou il s'affiche
     int min=0; 
     affichage7segments(fd,sec,min);
     while (1){
     
     //printf("seconde=%d\n",sec);
     //printf("minute=%d\n",min);
-    if(sec >= 50)
+    if(sec <= 10)
     {
         Led();
     }
     else{
         delay(1000);
     }
-    if (sec>=60){
-      sec=0;
-      min++;
-      break;  
-    }
-    sec++; 
+    
+    sec--; 
     affichage7segments(fd,sec,min);
     }
 }
