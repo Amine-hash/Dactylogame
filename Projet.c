@@ -69,7 +69,7 @@ void Client(char *ip_srv) {
     printf("Entrez votre nom d'utilisateur : ");
     scanf("%s", buff);
     envoyer(&sock, buff, NULL);
-
+    printf("En attente de joueur(s)...\n");
     recevoir(&sock, rep, NULL);
     strcat(sequence, rep);
     system("clear");
@@ -79,7 +79,6 @@ void Client(char *ip_srv) {
     for (int i = 3; i > 0; i--) {
         #ifdef CROSS_COMPILE
             printf("Début de la partie dans %d secondes\n", i);
-            sleep(1);
             wiringPiSetupPhys();
             Buzzer();
         #else
@@ -108,7 +107,6 @@ void Client(char *ip_srv) {
     }
 
     AffichageResultat(compteur_mot_correct);
-    PAUSE("Envoyer resultats au serveur \n");
 
     char resultat[10];
     sprintf(resultat, "%d", compteur_mot_correct);

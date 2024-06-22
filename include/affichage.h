@@ -11,6 +11,9 @@
 //si le fichier n'est pas défini
 #ifndef AFFICHAGE_H
 #include "../include/Projet.h"
+#ifdef CROSS_COMPILE
+    #include "../include/fonctionWiringPi.h"
+#endif
 #define AFFICHAGE_H
 #endif
 //prototypes
