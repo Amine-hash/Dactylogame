@@ -1,4 +1,4 @@
-PATH_CC=~/Documents/IG2I/IG2I/LA1/Linux_embarqué_2023-2024/Module_2/src/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin
+PATH_CC?=/home/theo/Bureau/rpi/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin
 CCC?=$(PATH_CC)/arm-linux-gnueabihf-gcc
 
 #definition des cibles par défaut
