@@ -100,7 +100,6 @@ socket_t creerSocketAdr (int mode, char *adrIP, short port){
  *	\note		Le domaine est nécessairement STREAM
  */
 socket_t creerSocketEcoute (char *adrIP, short port){
-	printf("Creer socket ecoute\n");
 	socket_t sock = creerSocketAdr (SOCK_STREAM, adrIP, port);
 	    // Mise en écoute de la socket
     CHECK(listen(sock.fd, 5) , "Can't calibrate");
