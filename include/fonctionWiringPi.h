@@ -20,7 +20,7 @@
 #define DB6 5
 #define DB7 6
 
-void Led();
+void Delay();
 void affichage7segments(int fd,int sec, int min);
 void chrono(int fd);
 void Buzzer();
