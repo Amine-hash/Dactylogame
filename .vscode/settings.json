@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "processus.h": "c",
+        "session.h": "c",
+        "fonctionwiringpi.h": "c",
+        "projet.h": "c",
+        "pthread.h": "c",
+        "conversion.h": "c",
+        "affichage.h": "c"
+    }
+}

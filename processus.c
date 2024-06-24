@@ -36,6 +36,7 @@ void GestionFils(int pid)
         pthread_create(&thread_compteur, NULL,TraitementCompteur, NULL);
         pause();
         #ifdef CROSS_COMPILE
+            wiringPiSetupPhys();
             JouerNoteDeFin();
         #endif
         //envoie du signal SIGINT au père
@@ -76,19 +77,21 @@ int GestionPere(int pid , char DoubleTab[100][30] , int compteur_mot_ecrit , cha
     if(strcmp(mot_ecrit, DoubleTab[compteur_mot_ecrit-1])==0)
     {
         #ifdef CROSS_COMPILE
-        //lcdClear(lcdHandle);
-        //writeLCD(lcdHandle, 0, 0, "Vrai");
+        wiringPiSetupSys();
+        lcdClear(lcdHandle);
+        writeLCD(lcdHandle, 0, 0, "Vrai");
         #endif
 
         mot_correct++;
     }
-    /*else
+    else
     {
         #ifdef CROSS_COMPILE
-        //lcdClear(lcdHandle);
-        //writeLCD(lcdHandle, 0, 0, "Faux");
+        wiringPiSetupPhys();
+        lcdClear(lcdHandle);
+        writeLCD(lcdHandle, 0, 0, "Faux");
         #endif
-    }*/
+    }
     return mot_correct;
 }
 
@@ -107,6 +110,7 @@ void *TraitementCompteur(void *arg)
     while (i >= 0)
     {
         #ifdef CROSS_COMPILE
+            wiringPiSetupPhys();
             int fd = wiringPiI2CSetup(I2C_ADDRESS); // Initialisation de l'afficheur 7 segments
             // Configuration de l'afficheur 7 segments
             wiringPiI2CWriteReg8(fd, 0x21, 0x01);

@@ -5,9 +5,18 @@
  * 
  * @param mot_correct 
  */
+extern int lcdHandle;
 void AffichageResultat(int mot_correct)
 {
     printf("Nombre de mots corrects : %d\n", mot_correct);
+    #ifdef CROSS_COMPILE
+        wiringPiSetupPhys();
+        lcdClear(lcdHandle);
+        writeLCD(lcdHandle, 0, 0, "Score :");
+        char str[50];
+        sprintf(str, "%d mots corrects", mot_correct);
+        writeLCD(lcdHandle, 0, 1, str);
+    #endif
 }
 
 
